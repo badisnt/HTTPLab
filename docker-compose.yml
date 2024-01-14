@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+
+  static:
+    image: static
+    build: ./static
+    ports:
+      - "8080:80"
