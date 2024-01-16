@@ -4,7 +4,7 @@ import io.javalin.*;
 
 public class Main {
     public static void main(String[] args) {
-        Javalin app = Javalin.create().start(7020);
+        Javalin app = Javalin.create().start(7000);
         BookingController bookingController = new BookingController();
         app.get("/api/bookings", bookingController::getAll);
         app.get("/api/bookings/{id}", bookingController::getOne);

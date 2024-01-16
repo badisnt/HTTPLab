@@ -26,6 +26,7 @@ class BookingController {
 
     public void getAll(Context ctx) {
         ctx.json(bookings);
+        ctx.status(200);
     }
 
     public void create(Context ctx) {
