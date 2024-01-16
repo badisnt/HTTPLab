@@ -7,7 +7,8 @@ services:
     build: ./static
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.static.rule=Host(`localhost`)"
+      - "traefik.http.routers.static.rule=Host(`localhost`) && PathPrefix(`/`)"
+      - "traefik.http.routers.static.tls=true"
       - "traefik.http.services.static.loadbalancer.server.port=80"
     deploy:
       replicas: 2
@@ -18,8 +19,9 @@ services:
     build: ./food-api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`)"
       - "traefik.http.services.api.loadbalancer.server.port=7000"
+      - "traefik.http.routers.api.tls=true"
       - "traefik.http.services.api.loadbalancer.sticky.cookie=true"
       - "traefik.http.services.api.loadbalancer.sticky.cookie.name=peanut-butter-cookie"
     deploy:
@@ -27,12 +29,14 @@ services:
     expose:
       - "7000"
 
-  #config source: https://doc.traefik.io/traefik/getting-started/quick-start/
   reverse_proxy:
     image: traefik:v2.10
     command: --api.insecure=true --providers.docker
     ports:
       - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./certificates:/etc/traefik/certificates
+      - ./traefik/traefik.yaml:/etc/traefik/
