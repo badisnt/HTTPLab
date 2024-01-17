@@ -1,7 +1,5 @@
 package app;
 
-import java.time.LocalDateTime;
-
 public class Booking {
     public String firstName = "";
     public String lastName = "";

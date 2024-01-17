@@ -2,7 +2,6 @@ package app;
 
 import io.javalin.http.Context;
 
-import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 
 class BookingController {
