@@ -48,7 +48,7 @@ To stop our container, we can use the following command: ```docker compose down`
 
 We created an HTTP API that manages a list of bookings at a restaurant. The bookings are in JSON format and contain the following:
 
-![Step 2 Screenshot 1](https://github.com/badisnt/HTTPLab/blob/main/figures/step2_1.png)
+![Step 2 Screenshot 1](https://github.com/badisnt/HTTPLab/blob/main/figures/step3_1.png)
 
 The base code for the API is from the example code for [6-http](https://github.com/HEIGVD-Course-DAI/dai-codeexamples/tree/main/6-http) of DAI. 
 
