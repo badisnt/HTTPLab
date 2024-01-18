@@ -14,8 +14,6 @@ services:
     deploy:
       mode: replicated
       replicas: 2
-    expose:
-      - "80"
   api:
     image: food-api
     build: ./food-api
@@ -30,8 +28,6 @@ services:
     deploy:
       mode: replicated
       replicas: 3
-    expose:
-      - "7000"
 
   reverse_proxy:
     image: traefik:v2.10
@@ -43,3 +39,16 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./certificates:/etc/traefik/certificates
       - ./traefik.yaml:/etc/traefik/traefik.yaml
+
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.localhost`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+      - "traefik.http.routers.portainer.entrypoints=https"
+      - "traefik.http.routers.portainer.tls=true"
