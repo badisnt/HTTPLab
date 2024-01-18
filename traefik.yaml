@@ -1,7 +1,7 @@
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
-    exposedByDefault: false
+    exposedByDefault: true
 
 entryPoints:
   http:
@@ -12,6 +12,7 @@ entryPoints:
 api:
   dashboard: true
   insecure: true
+  debug: true
 
 tls:
   certificates:
